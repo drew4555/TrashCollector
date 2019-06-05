@@ -20,5 +20,7 @@ namespace TrashCollector.Models
         }
 
         public System.Data.Entity.DbSet<TrashCollector.Models.Client> Clients { get; set; }
+
+        public System.Data.Entity.DbSet<TrashCollector.Models.Employee> Employees { get; set; }
     }
 }
