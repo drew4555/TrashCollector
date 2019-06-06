@@ -12,7 +12,11 @@ namespace TrashCollector.Controllers
 {
     public class EmployeesController : Controller
     {
-        private TrashCollectorContext db = new TrashCollectorContext();
+        ApplicationDbContext db;
+        public EmployeesController()
+        {
+            db = new ApplicationDbContext();
+        }
 
         // GET: Employees
         public ActionResult Index()

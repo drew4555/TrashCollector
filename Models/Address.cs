@@ -17,7 +17,7 @@ namespace TrashCollector.Models
         public string State { get; set; }
         public double Zip_Code { get; set; }
         [ForeignKey("ApplicationUser")]
-        public int FKId { get; set; }
-        public ApplicationUser applicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

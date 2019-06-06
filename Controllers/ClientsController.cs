@@ -13,8 +13,12 @@ namespace TrashCollector.Controllers
 {
     public class ClientsController : Controller
     {
-        private TrashCollectorContext db = new TrashCollectorContext();
 
+        ApplicationDbContext db;
+        public ClientsController()
+        {
+            db = new ApplicationDbContext();
+        }
         // GET: Clients
         public ActionResult Index()
         {
@@ -41,6 +45,7 @@ namespace TrashCollector.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -49,15 +54,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Address,Address_Line_2,City,State,Zip_Code,Payment_Info,Collection_Day,User_Name,Password,Extra_Pickup")] Client client)
+        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Credit_Card_Number,Experation_date,Three_digits_on_back,Collection_Day,Extra_Pickup")] Client client)
         {
             if (ModelState.IsValid)
             {
-                //client.FK = User.Identity.GetUserId();
+               
 
                 db.Clients.Add(client);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                var id = User.Identity.GetUserId();
+                return RedirectToAction("Create","Addresses",id);
             }
 
             return View(client);
@@ -120,13 +126,13 @@ namespace TrashCollector.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
