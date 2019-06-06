@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,11 +29,10 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Addresses/Create
-        public ActionResult Create(Client client)
+        public ActionResult Create(int id)
         {
             Address address = new Address();
-            address.Clientuserid = client.Id;
-
+            address.Clientuserid = id;
             return View(address);
         }
 
@@ -42,6 +42,9 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                // Address address = new Address();
+                // address.Clientuserid = client.Id;
+                
                 db.Addresses.Add(address);
                 db.SaveChanges();
                 return RedirectToAction("Details","Clients");

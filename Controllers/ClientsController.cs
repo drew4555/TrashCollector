@@ -62,8 +62,7 @@ namespace TrashCollector.Controllers
 
                 db.Clients.Add(client);
                 db.SaveChanges();
-                var id = client.Id;
-                return RedirectToAction("Create","Addresses");
+                return RedirectToAction("Create", "Addresses", new { id = client.Id });
             }
 
             return View(client);
