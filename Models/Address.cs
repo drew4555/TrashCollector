@@ -16,8 +16,8 @@ namespace TrashCollector.Models
         public string City { get; set; }
         public string State { get; set; }
         public double Zip_Code { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("Clients")]
+        public int Clientuserid { get; set; }
+        public Client Clients { get; set; }
     }
 }

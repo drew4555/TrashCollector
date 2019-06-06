@@ -26,9 +26,9 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Clients/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
-            //string ids = User.Identity.GetUserId();
+            id = User.Identity.GetUserId();
 
             if (id == null)
             {
@@ -58,19 +58,19 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                
 
                 db.Clients.Add(client);
                 db.SaveChanges();
-                var id = User.Identity.GetUserId();
-                return RedirectToAction("Create","Addresses",id);
+                var id = client.Id;
+                return RedirectToAction("Create","Addresses");
             }
 
             return View(client);
         }
 
         // GET: Clients/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {

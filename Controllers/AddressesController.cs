@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
 
+
 namespace TrashCollector.Controllers
 {
     public class AddressesController : Controller
@@ -27,9 +28,12 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Addresses/Create
-        public ActionResult Create(int id)
+        public ActionResult Create(Client client)
         {
-            return View();
+            Address address = new Address();
+            address.Clientuserid = client.Id;
+
+            return View(address);
         }
 
         // POST: Addresses/Create
@@ -40,7 +44,7 @@ namespace TrashCollector.Controllers
             {
                 db.Addresses.Add(address);
                 db.SaveChanges();
-                return RedirectToAction("Details","Client");
+                return RedirectToAction("Details","Clients");
             }
             catch
             {
