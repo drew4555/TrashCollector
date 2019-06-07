@@ -45,8 +45,20 @@ namespace TrashCollector.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
-            
-            return View();
+            //Setupdaysofweek();
+            ClientViewModel cvm = new ClientViewModel();
+
+            List<string> daysofweek = new List<string> { "monday", "tuesday", "wednesday", "thursday", "friday" };
+            var items = daysofweek;
+            if (items != null)
+            {
+                ViewBag.DaysOfWeek = items;
+            }
+
+            cvm.Client = new Client();
+            cvm.DaysOfWeek = new DaysofWeek();
+
+            return View(cvm);
         }
 
         // POST: Clients/Create
@@ -54,18 +66,19 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Credit_Card_Number,Experation_date,Three_digits_on_back,Collection_Day,Extra_Pickup")] Client client)
+        public ActionResult Create([Bind(Include = "Client, DaysOfWeek")] ClientViewModel clientViewModel)
         {
             if (ModelState.IsValid)
             {
-                
-
-                db.Clients.Add(client);
+                db.Clients.Add(clientViewModel.Client);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Addresses", new { id = client.Id });
+                clientViewModel.DaysOfWeek.CustomerId = clientViewModel.Client.Id;
+                db.DaysofWeeks.Add(clientViewModel.DaysOfWeek);
+                db.SaveChanges();
+                return RedirectToAction("Create", "Addresses", new { id = clientViewModel.Client.Id });
             }
 
-            return View(client);
+            return View(clientViewModel);
         }
 
         // GET: Clients/Edit/5
@@ -123,6 +136,10 @@ namespace TrashCollector.Controllers
             db.Clients.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public void Setupdaysofweek()
+        {
+
         }
 
         //protected override void Dispose(bool disposing)

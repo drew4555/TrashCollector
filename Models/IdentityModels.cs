@@ -32,5 +32,6 @@ namespace TrashCollector.Models
         public DbSet<Client> Clients { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<DaysofWeek> DaysofWeeks { get; set; }
     }
 }
