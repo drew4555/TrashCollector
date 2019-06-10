@@ -27,11 +27,12 @@ namespace TrashCollector.Controllers
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
+            Employee employee = db.Employees.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+
             if (employee == null)
             {
                 return HttpNotFound();
@@ -65,11 +66,12 @@ namespace TrashCollector.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
+            Employee employee = db.Employees.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            
             if (employee == null)
             {
                 return HttpNotFound();

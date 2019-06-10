@@ -70,10 +70,8 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                clientViewModel.Client.Collection_Day = clientViewModel.DaysOfWeek.Day;
                 db.Clients.Add(clientViewModel.Client);
-                db.SaveChanges();
-                clientViewModel.DaysOfWeek.CustomerId = clientViewModel.Client.Id;
-                db.DaysofWeeks.Add(clientViewModel.DaysOfWeek);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Addresses", new { id = clientViewModel.Client.Id });
             }
@@ -112,6 +110,7 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                clientViewModel.Client.Collection_Day = clientViewModel.DaysOfWeek.Day;
                 db.Entry(clientViewModel.Client).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Details","Clients", new { id = clientViewModel.Client.Id });
