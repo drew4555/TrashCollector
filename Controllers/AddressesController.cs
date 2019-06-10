@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
@@ -38,7 +39,7 @@ namespace TrashCollector.Controllers
 
         // POST: Addresses/Create
         [HttpPost]
-        public ActionResult Create(Address address)
+        public ActionResult Create(Address address, ClientViewModel clientViewModel)
         {
             try
             {
@@ -47,7 +48,7 @@ namespace TrashCollector.Controllers
                 
                 db.Addresses.Add(address);
                 db.SaveChanges();
-                return RedirectToAction("Details","Clients");
+                return RedirectToAction("Details","Clients", new { id = address.Clientuserid });
             }
             catch
             {
@@ -56,10 +57,21 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Addresses/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            Client client = db.Clients.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+            return View(client);
         }
+
 
         // POST: Addresses/Edit/5
         [HttpPost]

@@ -26,15 +26,15 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Clients/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
-            id = User.Identity.GetUserId();
+            Client client = db.Clients.Find(id);
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            
             if (client == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace TrashCollector.Controllers
             //Setupdaysofweek();
             ClientViewModel cvm = new ClientViewModel();
 
-            List<string> daysofweek = new List<string> { "monday", "tuesday", "wednesday", "thursday", "friday" };
+            List<string> daysofweek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
             var items = daysofweek;
             if (items != null)
             {
@@ -78,22 +78,29 @@ namespace TrashCollector.Controllers
                 return RedirectToAction("Create", "Addresses", new { id = clientViewModel.Client.Id });
             }
 
-            return View(clientViewModel);
+            return View();
         }
 
         // GET: Clients/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
+            ClientViewModel clientViewModel = new ClientViewModel();
+            clientViewModel.Client = db.Clients.Find(id);
+            List<string> daysofweek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+            var items = daysofweek;
+            if (items != null)
+            {
+                ViewBag.DaysOfWeek = items;
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
-            if (client == null)
+            if (clientViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(clientViewModel);
         }
 
         // POST: Clients/Edit/5
@@ -101,25 +108,26 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,First_Name,Last_Name,Address,Address_Line_2,City,State,Zip_Code,Payment_Info,Collection_Day,User_Name,Password,Extra_Pickup")] Client client)
+        public ActionResult Edit([Bind(Include = "Client, DaysOfWeek")] ClientViewModel clientViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
+                db.Entry(clientViewModel.Client).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Clients", new { id = clientViewModel.Client.Id });
             }
-            return View(client);
+            return View(clientViewModel);
         }
 
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
+            Client client = db.Clients.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+
             if (client == null)
             {
                 return HttpNotFound();

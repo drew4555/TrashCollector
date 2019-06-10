@@ -9,5 +9,6 @@ namespace TrashCollector.Models
     {
         public Client Client { get; set; }
         public DaysofWeek DaysOfWeek { get; set; }
+        public Address Address { get; set; }
     }
 }
