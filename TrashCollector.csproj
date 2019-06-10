@@ -170,7 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
-    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -253,11 +253,11 @@
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\AddRole.cshtml" />
     <Content Include="Views\userscontroller\Index.cshtml" />
-    <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Delete.cshtml" />
-    <Content Include="Views\Employees\Details.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
-    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Delete.cshtml" />
+    <Content Include="Views\Employee\Details.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Create.cshtml" />

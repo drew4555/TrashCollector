@@ -59,17 +59,20 @@ namespace TrashCollector.Controllers
         // GET: Addresses/Edit/5
         public ActionResult Edit(int? id)
         {
-            Client client = db.Clients.Find(id);
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var CurrentId = User.Identity.GetUserId();
+            Client client = db.Clients.Where(c => c.UserId == CurrentId).FirstOrDefault();
+            Address address = db.Addresses.Where(a => a.Clientuserid == client.Id).FirstOrDefault();
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
 
             if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(client);
+            return View(address);
         }
 
 

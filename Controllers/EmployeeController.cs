@@ -10,10 +10,10 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    public class EmployeesController : Controller
+    public class EmployeeController : Controller
     {
         ApplicationDbContext db;
-        public EmployeesController()
+        public EmployeeController()
         {
             db = new ApplicationDbContext();
         }
@@ -55,9 +55,10 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Employee");
             }
 
             return View(employee);

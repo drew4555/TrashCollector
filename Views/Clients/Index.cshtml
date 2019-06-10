@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector.Models.Client>
+﻿@model IEnumerable<TrashCollector.Models.ClientViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,25 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First_Name)
+            @Html.DisplayNameFor(model => model.Client.First_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Last_Name)
+            @Html.DisplayNameFor(model => model.Client.Last_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Credit_Card_Number)
+            @Html.DisplayNameFor(model => model.Client.Collection_Day)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Experation_date)
+            @Html.DisplayNameFor(model => model.Address.Address1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Three_digits_on_back)
+            @Html.DisplayNameFor(model => model.Address.Address_Line_2)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Collection_Day)
+            @Html.DisplayNameFor(model => model.Address.City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Extra_Pickup)
+            @Html.DisplayNameFor(model => model.Address.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address.Zip_Code)
         </th>
         <th></th>
     </tr>
