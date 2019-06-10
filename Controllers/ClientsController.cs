@@ -28,15 +28,18 @@ namespace TrashCollector.Controllers
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
-            Client client = db.Clients.Find(id);
-
+           
+            var CurrentId = User.Identity.GetUserId();
+            Client client = db.Clients.Where(c => c.UserId == CurrentId).FirstOrDefault();
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
+                
             }
             
             if (client == null)
             {
+
                 return HttpNotFound();
             }
             return View(client);
@@ -71,6 +74,7 @@ namespace TrashCollector.Controllers
             if (ModelState.IsValid)
             {
                 clientViewModel.Client.Collection_Day = clientViewModel.DaysOfWeek.Day;
+                clientViewModel.Client.UserId = User.Identity.GetUserId();
                 db.Clients.Add(clientViewModel.Client);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Addresses", new { id = clientViewModel.Client.Id });
@@ -81,7 +85,7 @@ namespace TrashCollector.Controllers
 
         // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
-        {
+      {
             ClientViewModel clientViewModel = new ClientViewModel();
             clientViewModel.Client = db.Clients.Find(id);
             List<string> daysofweek = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
@@ -124,7 +128,9 @@ namespace TrashCollector.Controllers
             Client client = db.Clients.Find(id);
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var CurrentId = User.Identity.GetUserId();
+                client = db.Clients.Where(c => c.UserId == CurrentId).FirstOrDefault();
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             if (client == null)
