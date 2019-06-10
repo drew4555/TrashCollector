@@ -24,7 +24,20 @@ namespace TrashCollector.Controllers
         {
             return View(db.Clients.ToList());
         }
-
+        public ActionResult ConfirmPickup(int? id)
+        {
+            if (id != null)
+            {
+                var customer = db.Clients.Find(id);
+                customer.Current_Bill += 25;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Clients");
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {

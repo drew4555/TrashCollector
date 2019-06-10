@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -39,7 +40,21 @@ namespace TrashCollector.Controllers
             }
             return View(employee);
         }
-
+        //Get: Customer/charge
+        public ActionResult ConfirmPickup(int?id)
+        {
+            if(id != null)
+            {
+                var client = db.Clients.Find(id);
+                client.Current_Bill += 25;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Clients");
+            }
+            else
+            {
+                return RedirectToAction("Index","Clients");
+            }
+        }
         // GET: Employees/Create
         public ActionResult Create()
         {

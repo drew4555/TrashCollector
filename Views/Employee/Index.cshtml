@@ -68,8 +68,8 @@
   @Html.HiddenFor(modelItem => item.Client.Current_Bill)
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Client.Id }) |
-        @Html.ActionLink("Confirm Pickup", "ConfirmPickup","Employee", new { id = item.Client.Id }) |
-        @Html.ActionLink("Delete", "Delete","Clients", new { id = item.Client.Id })
+        @Html.ActionLink("Confirm Pickup", "ConfirmPickup","Clients", new { id = item.Client.Id }, null) |
+        @Html.ActionLink("Delete", "Delete","Clients", new { id = item.Client.Id }, null)
     </td>
 </tr>
 }
