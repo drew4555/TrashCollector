@@ -274,6 +274,7 @@
     <Content Include="Views\Addresses\View.cshtml" />
     <Content Include="Views\Shared\_LayoutCustomer.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
+    <Content Include="Views\Employee\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
