@@ -16,11 +16,15 @@ namespace TrashCollector.Models
         public string Credit_Card_Number { get; set; }
         public string Experation_date { get; set; }
         public int Three_digits_on_back { get; set; }
+        public string Suspend_Service_Start { get; set; }
+        public string Suspend_Service_End { get; set; }
         public string Collection_Day { get; set; }
         public string Extra_Pickup { get; set; }
+        
         public int Current_Bill { get; set; }
         [ForeignKey("AppUser")]
         public string UserId { get; set; }
         public ApplicationUser AppUser { get; set; }
+        
     }
 }
